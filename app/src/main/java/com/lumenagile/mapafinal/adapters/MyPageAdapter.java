@@ -31,4 +31,14 @@ public class MyPageAdapter extends FragmentPagerAdapter {
     public int getCount() {
         return 2;
     }
+
+
+    @Override
+    public CharSequence getPageTitle(int position) {
+        if(position == 0)
+            return "Lista de ubicaciones";
+        else
+            return "Mapa";
+
+    }
 }

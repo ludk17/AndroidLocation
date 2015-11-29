@@ -30,6 +30,8 @@ public class MyMapFragment extends SupportMapFragment {
 
         GoogleMap map = getMap();
 
+        map.setMyLocationEnabled(true);
+
         MapSqlHelper sql = new MapSqlHelper(getContext(), "android", null, 1);
 
         SQLiteDatabase db = sql.getWritableDatabase();
