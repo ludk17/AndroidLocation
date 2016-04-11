@@ -1,12 +1,8 @@
-package com.lumenagile.mapafinal.listener;
+package com.lumenagile.mapafinal.services;
 
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
-import android.location.Location;
-import android.location.LocationListener;
-import android.os.Bundle;
-import android.util.Log;
 
 import com.lumenagile.mapafinal.database.MapSqlHelper;
 
@@ -16,16 +12,16 @@ import java.util.Date;
 /**
  * Created by ludk on 28/11/15.
  */
-public class MyLocationListener implements LocationListener {
+public class MyLocationService {
 
     private Context context;
 
-    public MyLocationListener(Context context) {
+    public MyLocationService(Context context) {
         this.context = context;
     }
 
-    @Override
-    public void onLocationChanged(Location location) {
+
+    public void saveLocation(double longitude, double latitude) {
 
 
         MapSqlHelper sql = new MapSqlHelper(context, "android", null, 1);
@@ -34,30 +30,13 @@ public class MyLocationListener implements LocationListener {
 
         ContentValues values = new ContentValues();
 
-        values.put("longitude", location.getLongitude());
-        values.put("latitude", location.getLatitude());
+        values.put("longitude", longitude);
+        values.put("latitude", latitude);
         values.put("time", getTime());
 
         db.insert("locations", null, values);
 
-
-
         db.close();
-
-
-    }
-    @Override
-    public void onStatusChanged(String provider, int status, Bundle extras) {
-
-    }
-
-    @Override
-    public void onProviderEnabled(String provider) {
-
-    }
-
-    @Override
-    public void onProviderDisabled(String provider) {
 
     }
 
